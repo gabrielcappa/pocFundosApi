@@ -4,6 +4,7 @@ import com.cappa.pocFundosApi.model.FundoEntity;
 import com.cappa.pocFundosApi.repository.FundoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -19,7 +20,8 @@ public class FundoController {
     private FundoRepository repository;
 
     @GetMapping
-    public List<FundoEntity> getFundos(){
-        return repository.findAll();
+    public ResponseEntity<List<FundoEntity>> getFundos(){
+        List<FundoEntity> fundos = repository.findAll();
+        return new ResponseEntity< List<FundoEntity>>(fundos,HttpStatus.OK);
     }
 }
